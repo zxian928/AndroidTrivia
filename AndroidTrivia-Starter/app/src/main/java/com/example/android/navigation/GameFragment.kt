@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
@@ -98,10 +99,15 @@ class GameFragment : Fragment() {
                         setQuestion()
                         binding.invalidateAll()
                     } else {
-                        // We've won!  Navigate to the gameWonFragment.
+                        // Adding the parameters to the Action
+                        view.findNavController()
+                                .navigate(GameFragmentDirections
+                                        .actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
                     }
                 } else {
-                    // Game over! A wrong answer sends us to the gameOverFragment.
+                    // Using directions to navigate to the GameOverFragment
+                    view.findNavController()
+                            .navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment())
                 }
             }
         }
